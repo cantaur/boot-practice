@@ -1,0 +1,6 @@
+spring:
+    datasource:
+        url: jdbc:mysql://192.168.0.100:3337/kda
+        username: kda
+        password: kda
+        driverClassName: com.mysql.cj.jdbc.Driver
