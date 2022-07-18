@@ -12,13 +12,11 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import javax.sql.DataSource;
 
 @Configuration
-@MapperScan(basePackages = "com.cantaur.practice.mapper",  sqlSessionFactoryRef = "sqlSessionFactory")
+@MapperScan(basePackages = "com.cantaur.practice.mapper")
 public class MybatisConfig {
 
     protected DataSource dataSource;
-
     protected String mapperLocationsPath;
-
     private static final String TYPE_ALIASES_PACKAGE = "com.cantaur.practice.model";
 
     public MybatisConfig(DataSource dataSource){
@@ -48,7 +46,7 @@ public class MybatisConfig {
     }
 
     @Bean(name = "sqlSessionFactory")
-    public SqlSessionFactory getSqlSessionFactory() throws Exception {
+    public SqlSessionFactory sqlSessionFactory() throws Exception {
         return configureSqlSessionFactory().getObject();
     }
 
