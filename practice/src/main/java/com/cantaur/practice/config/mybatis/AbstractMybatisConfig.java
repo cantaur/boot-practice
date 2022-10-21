@@ -1,31 +1,24 @@
 package com.cantaur.practice.config.mybatis;
 
+import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.type.JdbcType;
 import org.mybatis.spring.SqlSessionFactoryBean;
-import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import javax.sql.DataSource;
 
-@Configuration
-@MapperScan(basePackages = "com.cantaur.practice.mapper")
-public class MybatisConfig {
-
+public abstract class AbstractMybatisConfig {
     protected DataSource dataSource;
+
     protected String mapperLocationsPath;
+
     private static final String TYPE_ALIASES_PACKAGE = "com.cantaur.practice.model";
 
-    public MybatisConfig(DataSource dataSource){
-        this.dataSource = dataSource;
-        this.mapperLocationsPath = "classpath:/sql/*.xml";
-    }
-
     protected SqlSessionFactoryBean configureSqlSessionFactory() throws Exception {
-        org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
+        Configuration configuration = new Configuration();
         configuration.setLazyLoadingEnabled(Boolean.TRUE);
         configuration.setCacheEnabled(Boolean.FALSE);
         configuration.setUseGeneratedKeys(Boolean.TRUE);
@@ -45,10 +38,7 @@ public class MybatisConfig {
         return sessionFactoryBean;
     }
 
-    @Bean(name = "sqlSessionFactory")
-    public SqlSessionFactory sqlSessionFactory() throws Exception {
-        return configureSqlSessionFactory().getObject();
-    }
+    public abstract SqlSessionFactory getSqlSessionFactory() throws Exception;
 
-
+    public abstract DataSourceTransactionManager getTransactionManager();
 }

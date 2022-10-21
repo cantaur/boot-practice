@@ -10,18 +10,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
-import javax.sql.DataSource;
-
 @Configuration
 @PropertySource("classpath:/application.yml")
 public class DataSourceConfig {
 
 
     @Bean()
-    @ConfigurationProperties(prefix = "spring.datasource")
-    public DataSource dataSource() {
-        HikariDataSource dataSource = DataSourceBuilder.create().type(HikariDataSource.class).build();
-        return dataSource;
+    @ConfigurationProperties(prefix = "spring.datasource.hikari")
+    public HikariDataSource dataSource() {
+        return DataSourceBuilder.create().type(HikariDataSource.class).build();
     }
 
     @Bean
