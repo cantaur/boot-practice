@@ -37,4 +37,6 @@ out/
 .vscode/
 
 /src/main/resources/application-local.yml
-/build/
+/build
+build/resources/main/application.yml
+.gradle/
