@@ -1,0 +1,154 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.outerWrap {
+    width: 100vw;
+    height: 100vh;
+    min-height: 800px;
+    min-width: 500px;
+    background-color: #F1F1F1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.innerWrap {
+    width: 394px;
+    max-height: 700px;
+    background-color: #fff;
+    border:1px solid #ececec;
+    padding:45px;
+
+}
+.innerWrap > h2 {
+    font-size: 24px;
+    color : #333;
+    text-align: center;
+    padding:10px 0px;
+}
+.innerWrap .textInput {
+    width: 100%;
+    border: 1px solid #cecece;
+    border-radius: 4px;
+    height: 46px;
+    color: #999999;
+    padding: 17px 17px 15px 17px;
+    line-height: 13px;
+    margin-top:20px;
+    font-size: 14px;
+}
+.innerWrap .textInput::placeholder {
+    color:#aaa;
+}
+.innerWrap .textInput:focus {
+    outline: 0;
+}
+.innerWrap .loginBtn {
+    cursor: pointer;
+    width: 100%;
+    border: none;
+    height: 46px;
+    line-height: 46px;
+    text-align: center;
+    font-size: 15px;
+}
+.innerWrap .loginBtn.cashierBtn{
+    background-color: #3268b2;
+    margin-top:40px;
+    color: #fff;
+}
+.innerWrap .loginBtn.cashierBtn:hover{
+    background-color: #2c5c9e;
+}
+.innerWrap .loginBtn.kakaoBtn{
+    background-color: #fee500;
+    margin-top:50px;
+    color: #191919;
+    font-weight: bold;
+}
+.innerWrap .loginBtn.appleBtn{
+    background-color: #111;
+    margin-top:20px;
+    color: #fff;
+}
+.innerWrap .anchor {
+    display: inline-block;
+    color:#666;
+    cursor: pointer;
+    text-decoration: none;
+    transition: .1s ease-in-out;
+    font-size: 13px;
+    margin-top: 15px;
+    padding:0px 5px;
+}
+.innerWrap .anchor:hover {
+    color:#2196f3;
+}
+.innerWrap > p {
+    font-size: 15px;
+    width: 100%;
+    text-align: center;
+    margin-top:10px;
+}
+.innerWrap > p+p {
+    margin-top: 2px;
+}
+.innerWrap > p b {
+    font-weight: normal;
+    color: #3268b2;
+}
+.innerWrap > p.pwMsg {
+    margin: 0;
+    font-size: 12px;
+    text-align: left;
+    height: 16px;
+    color:#555;
+}
+.innerWrap > p.pwMsg.red {
+    color: red;
+}
+.innerWrap > p.pwMsg.blue {
+    color: #3268b2;
+}
+.innerWrap > p.pwMsg + .textInput {
+    margin-top:4px;
+}
+.innerWrap .emailAuthBox {
+    display: flex;
+    align-items: center;
+    margin-top:25px;
+}
+.innerWrap .emailAuthBox .textInput{
+    border-right: 0;
+    border-radius: 4px 0px 0px 4px;
+    margin:0px;
+}
+.innerWrap .emailAuthBox .authBtn {
+    flex-shrink: 0;
+    padding:0px 10px;
+    border:0;
+    background-color: #3268b2;
+    color:#fff;
+    height: 46px;
+    line-height: 46px;
+    border-radius: 0px 4px 4px 0px;
+    cursor: pointer;
+}
+.innerWrap .registBtn {
+    cursor: pointer;
+    width: 100%;
+    border: none;
+    height: 46px;
+    line-height: 46px;
+    font-size: 15px;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 16px;
+    background-color: #3268b2;
+    margin-top:40px;
+    color: #fff;
+}
+.innerWrap .registBtn:hover{
+    background-color: #2c5c9e;
+}

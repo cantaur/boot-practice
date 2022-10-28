@@ -2,6 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cantaur.practice.mapper.MemberMapper">
 
+    <select id="countMember" resultType="Integer" parameterType="String">
+        SELECT
+            count(*)
+        FROM
+            member
+        WHERE
+            email = #{email}
+            and platform = #{platform}
+    </select>
+
     <select id="findbyUid" resultType="Member" parameterType="Long">
         SELECT
             *
@@ -10,4 +20,53 @@
         WHERE
             member_uid = #{memberUid}
     </select>
+
+    <select id="findByEmail" resultType="Member" parameterType="String">
+        SELECT
+            *
+        FROM
+            member
+        WHERE
+            email = #{email}
+    </select>
+
+    <select id="selectMemberAccessToken" resultType="String" parameterType="String">
+        SELECT
+            access_token
+        FROM
+            member
+        WHERE
+            email = #{email}
+    </select>
+
+    <insert id="insertMember" parameterType="SocialMemberReq" useGeneratedKeys="true" keyProperty="memberUid">
+        insert into member(
+            email
+            ,password
+            ,birth
+            ,name
+            ,platform
+            ,access_token
+            ,refresh_token
+            ,created_at
+        ) VALUES (
+            #{email}
+            ,#{password}
+            ,#{birth}
+            ,#{name}
+            ,#{platform}
+            ,#{accessToken}
+            ,#{refreshToken}
+            ,now()
+         )
+
+    </insert>
+
+    <update id="updateAccessToken" parameterType="Member">
+        UPDATE member
+        SET
+            access_token = #{accessToken}
+        WHERE
+            email = #{email}
+    </update>
 </mapper>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default}" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+          name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+  />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>join</title>
+  <link
+          rel="stylesheet"
+          href="/main.css"
+  />
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <div class="outerWrap">
+    <div class="innerWrap">
+      <h2>회원가입 정보입력</h2>
+      <p>회원님의 본인인증이 완료되었습니다.</p>
+      <p><b>가입하실 정보를 입력</b>해 주세요.</p>
+      <input type="text" class="textInput textBtnInput" id="email" name="email" placeholder="이메일 입력" >
+      <input type="password" class="textInput" id="password" name="password" placeholder="비밀번호 입력" >
+      <p id="pwMsg" class="pwMsg">비밀번호는 문자 숫자 특수문자의 조합으로 8자 이상</p>
+      <input type="password" class="textInput" id="passwdCheck" name="passwdChack" placeholder="비밀번호 확인">
+      <p id="pwCheckMsg" class="pwMsg"></p>
+      <input type="text" class="textInput" id="name" name="name" placeholder="이름 입력">
+      <input type="text" class="textInput" id="birth" name="birth" placeholder="생년월일 입력">
+      <button class="registBtn disable" id="registBtn" onclick="joinMember(this)">확인</button>
+    </div>
+  </div>
+</body>
+<script>
+  function joinMember(){
+
+    let body = {
+      email: document.getElementById('email').value,
+      password : document.getElementById('password').value,
+      name : document.getElementById('name').value,
+      birth : document.getElementById('birth').value
+    };
+    const header = {
+      headers:{
+        'Content-Type':"application/json",
+      }
+    }
+    axios.post('/member/join',body,header)
+            .then(r=>{
+              console.log(r.data);
+              if(r.data.message==="fail"){
+                alert("이미 가입한 회원입니다.");
+              }else{
+                alert("회원가입이 완료되었습니다.");
+                console.log(r.data);
+                console.log(res.data.token);
+                document.cookie='user_security_token='+res.data.token;
+                location.href='/login';
+              }
+
+            })
+
+
+  }
+
+</script>
+
+
+
+
+</html>

@@ -26,8 +26,9 @@ public class MemberMybatisConfig extends AbstractMybatisConfig{
     }
 
     @Override
+    @Bean(name = "memberTransactionManager")
     public DataSourceTransactionManager getTransactionManager() {
-        return null;
+        return new DataSourceTransactionManager(dataSource);
     }
 
 

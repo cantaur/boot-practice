@@ -1,13 +1,11 @@
 package com.cantaur.practice.controller;
 
-import com.cantaur.practice.model.Member;
+import com.cantaur.practice.model.member.Member;
+import com.cantaur.practice.model.req.member.SocialMemberReq;
+import com.cantaur.practice.model.resp.ResultResp;
 import com.cantaur.practice.service.MemberService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -21,10 +19,8 @@ public class MemberController {
     }
 
 
-
-
-    @GetMapping("/list")
-    public Member findAll(){
-        return memberService.findAll();
+    @PostMapping("/join")
+    public ResultResp<?> signUp(@RequestBody SocialMemberReq socialMemberReq) throws Exception {
+        return new ResultResp<>(memberService.insertMember(socialMemberReq));
     }
 }

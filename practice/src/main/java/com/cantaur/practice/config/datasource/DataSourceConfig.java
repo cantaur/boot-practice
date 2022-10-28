@@ -23,7 +23,7 @@ public class DataSourceConfig {
 
     @Bean
     public SqlSessionTemplate sqlSessionTemplate(SqlSessionFactory sqlSessionFactory) {
-        return new SqlSessionTemplate(sqlSessionFactory, ExecutorType.BATCH);
+        return new SqlSessionTemplate(sqlSessionFactory, ExecutorType.REUSE);
     }
 
 

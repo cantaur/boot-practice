@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta
+            name="viewport"
+            content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>home</title>
+    <link
+            rel="stylesheet"
+            href="/main.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script type="text/javascript" src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"></script>
+</head>
+<body>
+
+<div class="outerWrap">
+    <div class="innerWrap">
+        <h2>로그인</h2>
+        <input type="text" class="textInput" id="email" placeholder="이메일 입력" name="email">
+        <input type="password" class="textInput" id="passwd" placeholder="비밀번호 입력" name="passwd">
+        <button class="loginBtn cashierBtn" onclick="emailLoginFunc()">이메일로 로그인</button>
+        <a href="./join" class="anchor">회원가입</a>
+        <button class="loginBtn kakaoBtn" onclick="kakaoLogin()">카카오계정으로 로그인</button>
+        <button class="loginBtn appleBtn">Apple계정으로 로그인</button>
+
+    </div>
+
+
+</div>
+</body>
+
+<script>
+    // document.addEventListener("DOMContentLoaded", () => {
+    //     axios.get("/user/check", {
+    //         headers: {
+    //             'Authorization': `Bearer ${$.cookie('user_security_token')}`,
+    //             'Content-Type': 'application/json'
+    //         }
+    //
+    //     },{timeout: 18000})
+    //         .then(r=>{
+    //             console.log(r)
+    //         })
+    // })
+
+    //이메일 로그인
+    const emailLoginFunc = () => {
+        let email = document.getElementById('email').value;
+        let password = document.getElementById('passwd').value;
+        if (email && password) {
+            let body = {
+                email: email,
+                password : password
+            };
+            axios.post('/login/signin', body, {
+                headers:{
+                    'Authorization': `Bearer ${$.cookie('user_security_token')}`,
+                    'Content-Type':"application/json",
+                }
+            })
+            .then(res => {
+                console.log(res);
+                document.cookie='user_security_token='+res.data.data.token;
+                location.href='/index';
+            });
+        } else {
+            alert("정보를정확히 입력해주세요.");
+        }
+    }
+
+    //카카오 로그인
+    function kakaoLogin(){
+
+        $.ajax({
+            url: 'login/kakao',
+            type: 'get',
+        }).done(function (res) {
+            console.log(res.data.kakaoUrl);
+            location.href = res.data.kakaoUrl;
+        });
+
+
+    }
+
+    function loginWithApple() {
+        $.ajax({
+            url: '/login/getAppleAuthUrl',
+            type: 'get',
+        }).done(function (res) {
+            console.log(res);
+            // location.href = res;
+        });
+    }
+
+
+
+
+
+</script>
+
+
+</html>

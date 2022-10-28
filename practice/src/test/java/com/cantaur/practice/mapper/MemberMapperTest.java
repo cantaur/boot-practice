@@ -1,6 +1,6 @@
 package com.cantaur.practice.mapper;
 
-import com.cantaur.practice.model.Member;
+import com.cantaur.practice.model.member.Member;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
